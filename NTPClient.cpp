@@ -44,7 +44,7 @@ bool NTPClient::begin(const char * address)
   return active;
 }
 
-void NTPClient::SetOffset(time_t offsetInSecond = 0)
+void NTPClient::SetOffset(time_t offsetInSecond)
 {
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
 
