@@ -16,14 +16,14 @@ class NTPClient
       0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
     };
 
-    unsigned int localPort = 8888;
+    unsigned int localPort;
     static const int NTP_PACKET_SIZE = 48; 
     byte packetBuffer[NTP_PACKET_SIZE];
     EthernetUDP Udp;
 
   public:
 
-    bool begin(const char * address);
+    bool begin(const char * address, unsigned int port);
     void SetOffset(int offsetInSecond = 0);
     String GetDateTimeWithOffset(unsigned long epoch, int offsetInSecond);
     String GetDateTime();
