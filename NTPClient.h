@@ -8,6 +8,7 @@ class NTPClient
 
   private:
 
+    int offset;
     char IP[15];
     String dateTime = "";
     byte mac[6] =
@@ -23,8 +24,8 @@ class NTPClient
   public:
 
     bool begin(const char * address);
-    void SetOffset(time_t offsetInSecond = 0);
-    String GetDateTimeWithOffset(unsigned long epoch, time_t offsetInSecond);
+    void SetOffset(int offsetInSecond = 0);
+    String GetDateTimeWithOffset(unsigned long epoch, int offsetInSecond);
     String GetDateTime();
 
 };
