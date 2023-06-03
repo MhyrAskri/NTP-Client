@@ -44,8 +44,9 @@ bool NTPClient::begin(const char * address)
   return active;
 }
 
-void NTPClient::SetOffset(time_t offsetInSecond)
+void NTPClient::SetOffset(int offsetInSecond)
 {
+  offset = offsetInSecond;
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
 
   // Initialize values needed to form NTP request
@@ -97,7 +98,7 @@ void NTPClient::SetOffset(time_t offsetInSecond)
 
 }
 
-String NTPClient::GetDateTimeWithOffset(unsigned long epoch, time_t offsetInSecond)
+String NTPClient::GetDateTimeWithOffset(unsigned long epoch, int offsetInSecond)
 {
   char buff[25];
   epoch += offsetInSecond;
@@ -107,5 +108,6 @@ String NTPClient::GetDateTimeWithOffset(unsigned long epoch, time_t offsetInSeco
 
 String NTPClient::GetDateTime()
 {
+  SetOffset(offset);
   return dateTime;
 }
