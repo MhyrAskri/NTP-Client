@@ -5,10 +5,11 @@
 #include "Timelib.h"
 #include "NTPClient.h"
 
-bool NTPClient::begin(const char * address)
+bool NTPClient::begin(const char * address, unsigned int port)
 {
   bool active = false;
   strncpy(IP, address, sizeof(IP));
+  localPort = port;
 
   //Ethernet.init(10);  // Most Arduino shields
   //Ethernet.init(5);   // MKR ETH shield
