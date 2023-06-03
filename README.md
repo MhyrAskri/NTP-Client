@@ -6,4 +6,4 @@ If you do not enter offset, you will see UTC Datetime.
 </br>
 I hope it will be useful for you.
 </br>
-# If you are from Iran, the time.nist.gov site may not work sometimes; So preferably use an internal IP.
+<strong>If you are from Iran, the time.nist.gov site may not work sometimes; So preferably use an internal IP.</strong>
