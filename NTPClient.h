@@ -25,7 +25,7 @@ class NTPClient
 
     bool begin(const char * address, unsigned int port = 8888);
     void SetOffset(int offsetInSecond = 0);
-    void GetDatetimeFromNTP()
+    void GetDatetimeFromNTP();
     String GetDateTimeWithOffset(unsigned long epoch);
     String GetDateTime();
 
