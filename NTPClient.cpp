@@ -96,8 +96,6 @@ void NTPClient::GetDatetimeFromNTP()
     epoch = secsSince1900 - seventyYears;
   }
   dateTime = GetDateTimeWithOffset(epoch);
-  // wait ten seconds before asking for the time again
-  delay(10000);
 
   Ethernet.maintain();
 
