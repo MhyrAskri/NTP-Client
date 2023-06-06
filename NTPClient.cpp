@@ -95,7 +95,7 @@ void NTPClient::GetDatetimeFromNTP()
     const unsigned long seventyYears = 2208988800UL;
     epoch = secsSince1900 - seventyYears;
   }
-  dateTime = GetDateTimeWithOffset(epoch, offset);
+  dateTime = GetDateTimeWithOffset(epoch);
   // wait ten seconds before asking for the time again
   delay(10000);
 
@@ -103,7 +103,7 @@ void NTPClient::GetDatetimeFromNTP()
 
 }
 
-String NTPClient::GetDateTimeWithOffset(unsigned long epoch, int offsetInSecond)
+String NTPClient::GetDateTimeWithOffset(unsigned long epoch)
 {
   char buff[25];
   epoch += offset;
