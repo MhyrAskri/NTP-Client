@@ -48,6 +48,10 @@ bool NTPClient::begin(const char * address, unsigned int port)
 void NTPClient::SetOffset(int offsetInSecond)
 {
   offset = offsetInSecond;
+}
+  
+void NTPClient::GetDatetimeFromNTP()
+{
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
 
   // Initialize values needed to form NTP request
@@ -91,7 +95,7 @@ void NTPClient::SetOffset(int offsetInSecond)
     const unsigned long seventyYears = 2208988800UL;
     epoch = secsSince1900 - seventyYears;
   }
-  dateTime = GetDateTimeWithOffset(epoch, offsetInSecond);
+  dateTime = GetDateTimeWithOffset(epoch, offset);
   // wait ten seconds before asking for the time again
   delay(10000);
 
@@ -102,13 +106,13 @@ void NTPClient::SetOffset(int offsetInSecond)
 String NTPClient::GetDateTimeWithOffset(unsigned long epoch, int offsetInSecond)
 {
   char buff[25];
-  epoch += offsetInSecond;
-  sprintf(buff, "%04d/%02d/%02d - %02d:%02d:%02d", year(epoch), month(epoch), day(epoch), hour(epoch), minute(epoch), second(epoch));
+  epoch += offset;
+  sprintf(buff, "%04d/%02d/%02d %02d:%02d:%02d", year(epoch), month(epoch), day(epoch), hour(epoch), minute(epoch), second(epoch));
   return buff;
 }
 
 String NTPClient::GetDateTime()
 {
-  SetOffset(offset);
+  GetDatetimeFromNTP();
   return dateTime;
 }
