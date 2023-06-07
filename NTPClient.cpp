@@ -18,29 +18,8 @@ bool NTPClient::begin(const char * address, unsigned int port)
   //Ethernet.init(15);  // ESP8266 with Adafruit Featherwing Ethernet
   //Ethernet.init(33);  // ESP32 with Adafruit Featherwing Ethernet
 
-  if (!Serial)
-  {
-    Serial.println("Can not start Serial for ethernet shield in NTP-Client!");
-  }
-  
-  // start Ethernet and UDP
-  if (Ethernet.begin(mac) == 0)
-  {
-    Serial.println("Failed to configure Ethernet using DHCP");
-    if (Ethernet.hardwareStatus() == EthernetNoHardware)
-    {
-      Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
-    } 
-    else if (Ethernet.linkStatus() == LinkOFF)
-    {
-      Serial.println("Ethernet cable is not connected.");
-    }
-  }
-  else
-  {
-    Udp.begin(localPort);
-    active = true;
-  }
+  Udp.begin(localPort);
+  active = true;
   
   return active;
 }
@@ -94,11 +73,14 @@ void NTPClient::GetDatetimeFromNTP()
     // Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
     const unsigned long seventyYears = 2208988800UL;
     epoch = secsSince1900 - seventyYears;
+    dateTime = GetDateTimeWithOffset(epoch);
   }
-  dateTime = GetDateTimeWithOffset(epoch);
+  else
+  {
+    dateTime = "";
+  }
 
   Ethernet.maintain();
-
 }
 
 String NTPClient::GetDateTimeWithOffset(unsigned long epoch)
